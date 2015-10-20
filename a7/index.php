@@ -35,11 +35,18 @@
         }
     </style>
     
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script>
-        $(".photo").each(function() {
-            $(this).css("transform", Math.floor(Math.random() * 91));
+        $(document).ready(function() {
+            $(".photo").each(function() {
+                $(this).css("transform", "rotate(" + ((Math.floor(Math.random() * 182)) - 91) + "deg)");
+                $(this).offset({
+                    top: (Math.floor(Math.random() * 400) + 50),
+                    left: (Math.floor(Math.random() * 400) + 50)
+                });
+            });
         });
+        
     </script>
 </head>
 <body>
