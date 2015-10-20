@@ -11,7 +11,6 @@
         }
         
         .photo {
-            transform: rotate(<?=mt_rand(-90, 90)?>deg);
             float: left;
             background-color: ghostwhite;
             padding: 4px 8px 15px 8px;
@@ -35,6 +34,13 @@
             height: 150px;
         }
     </style>
+    
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script>
+        $(".photo").each(function() {
+            $(this).css("transform", Math.floor(Math.random() * 91));
+        });
+    </script>
 </head>
 <body>
     <h1>Assignment 7 : Project PHP</h1>
