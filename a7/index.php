@@ -3,61 +3,49 @@
 <head>
     <title>Assignment 7 : Project PHP</title>
     <style>
-        body {
-            background-color: white;
-        }
         h1 {
             text-align: center;
         }
         
-        .photo {
-            float: left;
-            background-color: ghostwhite;
-            padding: 4px 8px 15px 8px;
-            border: 1px solid black;
-            margin: 2px;
-        }
-        
-        .photo p {
-            text-align: center;
-        }
-        
         #animalPhotos {
-            width: 90%;
             margin: auto;
         }
         
         #animalPhotos img {
-            display: block;
-            margin: auto;
-            border: 1px solid black;
             height: 150px;
+        }
+        
+        #muchfunlink {
+            display: block; 
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
         }
     </style>
     
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(window).load(function() {
+            var totalWidth = 0;
             $(".photo").each(function() {
-                $(this).css("transform", "rotate(" + ((Math.floor(Math.random() * 182)) - 91) + "deg)");
-                $(this).offset({
-                    top: (Math.floor(Math.random() * 400) + 50),
-                    left: (Math.floor(Math.random() * 400) + 50)
-                });
+                totalWidth += $(this).width();
+                console.log(totalWidth);
             });
+            $("#animalPhotos").width(totalWidth);
         });
-        
     </script>
 </head>
 <body>
-    <h1>Assignment 7 : Project PHP</h1>
+    
     <div id="animalPhotos">
+        <h1>Assignment 7 : Project PHP</h1>
         <?php
             $dir = preg_grep("/.+\.jpg/", scandir("."));
             foreach($dir as $file) {
-                echo "<div class='photo'><img src='$file'><p>$file</p></div>";
+                echo "<img src='$file' class='photo'>";
             }
         ?>
     </div>
+    <a href="muchfun.php" id="muchfunlink">Click here to much fun</a>
 </body>
 </head>
