@@ -8,7 +8,7 @@
         }
         
         #animalPhotos {
-            margin: auto;
+            text-align: center;
         }
         
         #animalPhotos img {
@@ -22,23 +22,10 @@
             right: 15px;
         }
     </style>
-    
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script>
-        $(window).load(function() {
-            var totalWidth = 0;
-            $(".photo").each(function() {
-                totalWidth += $(this).width();
-                console.log(totalWidth);
-            });
-            $("#animalPhotos").width(totalWidth);
-        });
-    </script>
 </head>
 <body>
-    
+    <h1>Assignment 7 : Project PHP</h1>
     <div id="animalPhotos">
-        <h1>Assignment 7 : Project PHP</h1>
         <?php
             $dir = preg_grep("/.+\.jpg/", scandir("."));
             foreach($dir as $file) {
