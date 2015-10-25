@@ -43,7 +43,7 @@
             width: 650px;
             height: 100%;
             margin: auto;
-            background-color: rgba(58, 66, 66, 0.8);
+            background-color: rgba(58, 66, 66, 0.9);
             padding: 8px;
             transition: all 2s;
         }
