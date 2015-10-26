@@ -5,12 +5,12 @@
     <style>
         body {
             font-family: "Tahoma";
-            background-image: 
+            /*background-image: */
                 /*linear-gradient(*/
                 /*    rgba(0, 0, 0, 0.5),*/
                 /*    rgba(0, 0, 0, 0.5)*/
                 /*),*/
-                url("https://farm5.staticflickr.com/4046/4313864280_c0dc33b1da_b.jpg");
+                /*url("https://farm5.staticflickr.com/4046/4313864280_c0dc33b1da_b.jpg");*/
             background-size: cover;
             background-repeat: no-repeat;
             background-color: rgba(58, 66, 66, 1);
@@ -24,8 +24,14 @@
         }
         
         #content {
-            padding: 8px;
+            /*padding: 8px;*/
             font-size: 1.25em;
+            border: 5px solid transparent;
+            -moz-border-image: -moz-linear-gradient(153deg, rgba(58, 66, 66, 0) 60%, #778899 100%);
+            -webkit-border-image: -webkit-linear-gradient(153deg, rgba(58, 66, 66, 0) 60%, #778899 100%);
+            border-image: linear-gradient(153deg, rgba(58, 66, 66, 0) 60%, #778899 100%);
+            border-image-slice: 1;
+            color: white;
         }
         
         #content > h1 {
@@ -38,14 +44,19 @@
         }
         
         #container {
-            position: relative;
-            top: 200px;
+            /*position: relative;*/
+            /*top: 200px;*/
             width: 650px;
             height: 100%;
-            margin: auto;
+            margin: 0 auto;
             background-color: rgba(58, 66, 66, 0.9);
-            padding: 8px;
+            /*padding: 8px;*/
             transition: all 2s;
+        }
+        
+        #content > h1, #content > p, #content > ul {
+            margin: 0;
+            padding-bottom: 8px;
         }
         
         #container:after {
@@ -65,23 +76,41 @@
             height: 100%;
             min-height: 104px;
             float: left;
-            background-color: red;
+        }
+        
+        /* Loading Text Animation */
+        @keyframes textChange {
+            0%   {font-size: 2em;}
+            50%  {font-size: 2.8em;}
+            100% {font-size: 2em;}
+        }
+        
+        #loading-txt {
+            animation-name: textChange;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            -webkit-animation-timing-function: ease; /* Chrome, Safari, Opera */
+            animation-timing-function: ease;
         }
     </style>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script>
         function accessWebService(apiStr, callback) {
-            var url = "http://cs2830.azurewebsites.net/a8/webservice.php?" + apiStr;
+            var url = "https://cs2830.azurewebsites.net/a8/webservice.php?" + apiStr;
             // console.log(url);
             $.get(url, function(data) {
                 callback(data);
             });
         }
         
+        function loadingText() {
+            $("#content").html("<h1 id='loading-txt'>Loading!</h1>");
+        }
+        
         $(document).ready(function() {
             // Get home data and display it
             $("#home-btn").click(function() {
-                $("#content").html("<h1>Loading!</h1>");
+                loadingText();
                 accessWebService("content=home", function(data) {
                     console.log(data);
                     $("#content").html(data);
@@ -90,7 +119,7 @@
             
             // Get XML Data and display it
             $("#xml-btn").click(function() {
-                $("#content").html("<h1>Loading!</h1>");
+                loadingText();
                 
                 accessWebService("content=data&format=xml", function(data) {
                     var dinosaurs = {};
@@ -114,7 +143,7 @@
             
             // Get JSON Data and display it
             $("#json-btn").click(function() {
-                $("#content").html("<h1>Loading!</h1>");
+                loadingText();
                 
                 accessWebService("content=data&format=json", function(data) {
                     var htmlStr = "<ul>";
