@@ -5,15 +5,10 @@
     <style>
         body {
             font-family: "Tahoma";
-            /*background-image: */
-                /*linear-gradient(*/
-                /*    rgba(0, 0, 0, 0.5),*/
-                /*    rgba(0, 0, 0, 0.5)*/
-                /*),*/
-                /*url("https://farm5.staticflickr.com/4046/4313864280_c0dc33b1da_b.jpg");*/
+            color: #000;
             background-size: cover;
             background-repeat: no-repeat;
-            background-color: rgba(58, 66, 66, 1);
+            background-color: #313131;
         }
         
         .nav-btns {
@@ -24,39 +19,35 @@
         }
         
         #content {
-            /*padding: 8px;*/
             font-size: 1.25em;
-            border: 5px solid transparent;
-            -moz-border-image: -moz-linear-gradient(153deg, rgba(58, 66, 66, 0) 60%, #778899 100%);
-            -webkit-border-image: -webkit-linear-gradient(153deg, rgba(58, 66, 66, 0) 60%, #778899 100%);
-            border-image: linear-gradient(153deg, rgba(58, 66, 66, 0) 60%, #778899 100%);
-            border-image-slice: 1;
-            color: white;
         }
         
         #content > h1 {
             text-align: center;
         }
         
-        #page-title {
-            color: white;
+        #content > p {
             text-align: center;
-        }
-        
-        #container {
-            /*position: relative;*/
-            /*top: 200px;*/
-            width: 650px;
-            height: 100%;
-            margin: 0 auto;
-            background-color: rgba(58, 66, 66, 0.9);
-            /*padding: 8px;*/
-            transition: all 2s;
         }
         
         #content > h1, #content > p, #content > ul {
             margin: 0;
             padding-bottom: 8px;
+        }
+        
+        #page-title {
+            text-align: center;
+        }
+        
+        #container {
+            width: 650px;
+            height: 100%;
+            min-height: 200px;
+            margin: 0 auto;
+            padding-right: 11.5px;
+            padding-top: 1px;
+            background-color: #F8FDF4;
+            border-radius: 15px;
         }
         
         #container:after {
@@ -89,7 +80,8 @@
             animation-name: textChange;
             animation-duration: 2s;
             animation-iteration-count: infinite;
-            -webkit-animation-timing-function: ease; /* Chrome, Safari, Opera */
+            -webkit-animation-timing-function: ease;
+            -moz-animation-timing-function: ease;
             animation-timing-function: ease;
         }
     </style>
@@ -97,7 +89,6 @@
     <script>
         function accessWebService(apiStr, callback) {
             var url = "https://cs2830.azurewebsites.net/a8/webservice.php?" + apiStr;
-            // console.log(url);
             $.get(url, function(data) {
                 callback(data);
             });
@@ -112,7 +103,6 @@
             $("#home-btn").click(function() {
                 loadingText();
                 accessWebService("content=home", function(data) {
-                    console.log(data);
                     $("#content").html(data);
                 });
             });
@@ -120,20 +110,17 @@
             // Get XML Data and display it
             $("#xml-btn").click(function() {
                 loadingText();
-                
                 accessWebService("content=data&format=xml", function(data) {
-                    var dinosaurs = {};
+                    var dinosaurs = [];
                     var i = 0;
-                    // console.log(data);
                     $(data).find('dinosaur').each(function() {
                         dinosaurs[i++] = {
                             name: $(this).find("name").text(),
                             period: $(this).find("period").text()
                         };
                     });
-                    console.dir(dinosaurs);
                     var htmlStr = "<ul>";
-                    for(i = 0; i < Object.keys(dinosaurs).length; i++) {
+                    for(i = 0; i < dinosaurs.length; i++) {
                         htmlStr += "<li>" + dinosaurs[i]['name'] + " lived during the " + dinosaurs[i]['period'];
                     }
                     htmlStr += "</ul>";
@@ -144,7 +131,6 @@
             // Get JSON Data and display it
             $("#json-btn").click(function() {
                 loadingText();
-                
                 accessWebService("content=data&format=json", function(data) {
                     var htmlStr = "<ul>";
                     for(var i = 0; i < data.length; i++) {
@@ -168,7 +154,7 @@
         </div>
         <div id="column-right">
             <div id="content">
-                <h1>Select an option from the left!</h1>
+                <h2>Select an option from the left!</h2>
             </div>
         </div>
     </div>
